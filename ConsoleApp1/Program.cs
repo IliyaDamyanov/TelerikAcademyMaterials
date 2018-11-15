@@ -1,6 +1,8 @@
 ﻿using DocumentFormat.OpenXml.Packaging;
 using DocumentFormat.OpenXml.Wordprocessing;
 using DuplicateLinks;
+using FileSystemNavigation;
+using System;
 using System.IO;
 
 namespace ConsoleApp1
@@ -11,7 +13,12 @@ namespace ConsoleApp1
         {
             //YouTubeLinks youTubeLinks = new YouTubeLinks();
             //youTubeLinks.test();
-            OpenAndAddTextToWordDocument(@"C:\Users\IliyaDamyanov\Desktop\Links.docx", "kur");
+
+            //OpenAndAddTextToWordDocument(@"C:\Users\IliyaDamyanov\Desktop\Links.docx", "kur");
+            string path = @"C:\Users\IliyaDamyanov\Desktop\TelerikAcademyMaterials\ConsoleApp1\bin\Debug";
+            //string path = Console.ReadLine();
+            FolderNavigation navigation = new FolderNavigation(path);
+            Console.WriteLine(navigation.GettingFolderName());
         }
 
         public void WordReader()

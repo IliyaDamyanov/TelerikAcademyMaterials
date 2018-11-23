@@ -17,7 +17,7 @@ namespace ConsoleApp1
             //OpenAndAddTextToWordDocument(@"C:\Users\IliyaDamyanov\Desktop\Links.docx", "kur");
             string path = @"C:\Users\IliyaDamyanov\Desktop\TelerikAcademyMaterials\ConsoleApp1\bin\Debug";
             //string path = Console.ReadLine();
-            FolderNavigation navigation = new FolderNavigation(path);
+            asd navigation = new asd(path);
             Console.WriteLine(navigation.GettingFolderName());
         }
 

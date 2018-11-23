@@ -1,8 +1,5 @@
 ﻿using DocumentFormat.OpenXml.Packaging;
 using DocumentFormat.OpenXml.Wordprocessing;
-using DuplicateLinks;
-using FileSystemNavigation;
-using System;
 using System.IO;
 
 namespace ConsoleApp1
@@ -17,8 +14,6 @@ namespace ConsoleApp1
             //OpenAndAddTextToWordDocument(@"C:\Users\IliyaDamyanov\Desktop\Links.docx", "kur");
             string path = @"C:\Users\IliyaDamyanov\Desktop\TelerikAcademyMaterials\ConsoleApp1\bin\Debug";
             //string path = Console.ReadLine();
-            asd navigation = new asd(path);
-            Console.WriteLine(navigation.GettingFolderName());
         }
 
         public void WordReader()

@@ -5,17 +5,15 @@ namespace TelerikAcademyMaterials.Utils
 {
     public class FileReader : IReader
     {
-        protected readonly string filePath;
-
-        public FileReader(string filePath)
+        public string FilePath
         {
-            this.filePath = filePath;
+            get; set;
         }
 
         public virtual string Read()
         {
             string text = string.Empty;
-            using (StreamReader streamReader = new StreamReader(this.filePath))
+            using (StreamReader streamReader = new StreamReader(this.FilePath))
             {
                 text = streamReader.ReadToEnd();
             }

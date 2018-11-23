@@ -1,27 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using TelerikAcademyMaterials.Contracts;
+using TelerikAcademyMaterials.Utils;
 
 namespace TelerikAcademyMaterials
 {
     public class FolderStructure
     {
         private readonly IWriter writer;
+        private readonly FileReader reader;
         private IDictionary<string, string> paths;
-        private readonly int preFolderPathLenght;
-        private readonly int lastSlashIndex;
 
-        public FolderStructure(IWriter writer, int preFolderPathLenght)
+        public FolderStructure(IWriter writer, FileReader reader)
         {
             this.paths = new Dictionary<string, string>();
             this.writer = writer;
-            this.preFolderPathLenght = preFolderPathLenght;
-            this.lastSlashIndex = preFolderPathLenght - 1;
-
+            this.reader = reader;
         }
 
         public IDictionary<string, string> AllPathsFinder(string entryFolder)
@@ -32,10 +27,16 @@ namespace TelerikAcademyMaterials
             {
                 foreach (string folder in Directory.GetDirectories(currentFolder))
                 {
-                    paths.Add(folder.Substring(lastSlashIndex + 1, folder.Length - lastSlashIndex - 1), "folder");
                     foreach (string file in Directory.GetFiles(folder))
                     {
-                        paths.Add(file.Substring(lastSlashIndex + 1, file.Length - lastSlashIndex - 1), "file");
+                        if (file.Contains("Links"))
+                        {
+                            reader.FilePath = file;
+                            string wordText = reader.Read();
+                            this.YouTubeLinkFinder(wordText);
+                            
+
+                        }
                     }
                     AllPathsFinder(folder);
                 }
@@ -48,6 +49,14 @@ namespace TelerikAcademyMaterials
             }
 
             return paths;
+        }
+
+        public void YouTubeLinkFinder(string wordText)
+        {
+            int youtubeLinkStartIndex = wordText.IndexOf("https://www.youtube.com");
+            int youtubeLinkEndIndex = wordText.IndexOf("</", youtubeLinkStartIndex);
+            string youtubeLink = wordText.Substring(youtubeLinkStartIndex, youtubeLinkEndIndex - youtubeLinkStartIndex);
+
         }
     }
 }
